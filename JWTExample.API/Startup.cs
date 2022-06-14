@@ -56,7 +56,6 @@ options.UseSqlServer(@"Server=TEC-5350-LA0052;Database=mandag; Trusted_Connectio
             // hvad er det egenligt vi laver her?
             // her sætter vi class = vore .json fil, således at vi kan benytte JWTSetting i stedet for .json filen
             services.Configure<JWTSetting>(Configuration.GetSection("JWTSetting")); 
-            //services.AddScoped<Iauthor, Author>();
             var authkey = Configuration.GetValue<string>("JWTSetting:secretkey"); // det skal være :
 
 
@@ -96,7 +95,8 @@ options.UseSqlServer(@"Server=TEC-5350-LA0052;Database=mandag; Trusted_Connectio
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("kage");
+            app.UseAuthentication();
             app.UseAuthorization();
            // app.UseAuthentication();
 
